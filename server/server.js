@@ -15,5 +15,5 @@ app.use(myRouter.routes())
 app.use(myRouter.allowedMethods())
 
 app.listen(3000, () => {
-  console.log('listen localhost:3000 now')
+  console.log('listen localhost:3000!')
 })

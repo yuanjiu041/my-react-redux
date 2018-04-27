@@ -27,5 +27,11 @@ module.exports = merge(baseConfig, {
     process: true,
     path: true,
     http: true
-  }
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      __SERVER__: true
+    })
+  ]
 })
