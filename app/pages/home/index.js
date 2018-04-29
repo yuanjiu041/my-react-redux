@@ -9,8 +9,16 @@ import { connect } from 'react-redux'
 })
 class Home extends React.Component {
   render () {
-    return <div>home</div>
+    const { data } = this.props
+
+    return <div>{data}</div>
   }
 }
 
-export default connect()(Home)
+const mapStateToProps = (state) => {
+  return {
+    data: state.common.__PAGEDATA__
+  }
+}
+
+export default connect(mapStateToProps)(Home)

@@ -10,7 +10,7 @@ export default (reducer, stateKey) => {
     if (action.type === DATA_FETCH_SUCCESS && action.stateKey === stateKey) {
       nextState = {
         ...nextState,
-        pagedata: action.data
+        __PAGEDATA__: action.data
       }
     }
 

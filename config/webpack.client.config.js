@@ -8,8 +8,8 @@ const path = require('path')
 module.exports = merge(baseConfig, {
 
   entry: {
-    app: ['babel-polyfill', './app/app.js'],
-    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk']
+    app: ['./app/app.js'],
+    vendor: ['babel-polyfill', 'react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk']
   },
 
   output: {
@@ -32,6 +32,12 @@ module.exports = merge(baseConfig, {
       path: path.resolve('./dist'),
       filename: 'assets.json',
       prettyPrint: true
-    })
+    }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor'],
+    }),
+
+    new webpack.optimize.UglifyJsPlugin()
   ]
 })

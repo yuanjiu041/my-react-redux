@@ -27,7 +27,7 @@ export default class extends React.Component {
         <body>
           <div id='app' dangerouslySetInnerHTML={{ __html: children }} />
           <script dangerouslySetInnerHTML={{ __html:  `window.__APP__=${serialize(app)}` }} />
-          <script src='/static/vensor.js' />
+          <script src='/static/vendor.js' />
           <script src='/static/app.js' />
         </body>
       </html>
