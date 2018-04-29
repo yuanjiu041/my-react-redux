@@ -1,12 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import rem from 'Lib/rem'
 import serialize from 'serialize-javascript'
 import baseStyle from 'Common/main'
 import { getCss } from 'Lib/universal-css'
 
 export default class extends React.Component {
+  static propTypes = {
+    title: PropTypes.string,
+    app: PropTypes.object
+  }
+
   render () {
-    const { title, children } = this.props
+    const { title, children, app } = this.props
     const css = getCss()
     
     return (
@@ -20,7 +26,9 @@ export default class extends React.Component {
         </head>
         <body>
           <div id='app' dangerouslySetInnerHTML={{ __html: children }} />
-          <script src='/app.js'></script>
+          <script dangerouslySetInnerHTML={{ __html:  `window.__APP__=${serialize(app)}` }} />
+          <script src='/static/vensor.js' />
+          <script src='/static/app.js' />
         </body>
       </html>
     )

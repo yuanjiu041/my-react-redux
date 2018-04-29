@@ -4,12 +4,17 @@ import koaBody from 'koa-body'
 import router from './router'
 import koaStatic from 'koa-static'
 
+const staticMid = require('./middleware/static')
+
 const app = new koa()
 const myRouter = router()
 
 app.use(koaBody())
 
-app.use(koaStatic(path.join(__dirname, '../dist')))
+app.use(staticMid({
+  rule: '/static/*',
+  filePath: path.join(__dirname, '../dist')
+}))
 
 app.use(myRouter.routes())
 app.use(myRouter.allowedMethods())

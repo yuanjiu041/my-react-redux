@@ -13,13 +13,16 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.css', '.less'],
+    extensions: ['.js', '.css', '.less', 'json'],
     alias: {
       Pages: path.resolve(contextPath, 'app/pages'),
       Components: path.resolve(contextPath, 'app/components'),
       Lib: path.resolve(contextPath, 'app/lib'),
       Common: path.resolve(contextPath, 'app/common'),
-      Resources: path.resolve(contextPath, 'app/resources')
+      Resources: path.resolve(contextPath, 'app/resources'),
+      Actions: path.resolve(contextPath, 'app/actions'),
+      Controllers: path.resolve(contextPath, 'apis/controllers'),
+      Config: path.resolve(contextPath, 'config')
     }
   },
   

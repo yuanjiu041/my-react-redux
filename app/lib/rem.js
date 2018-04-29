@@ -1,3 +1,4 @@
+// 移动端常用处理方法，通过rem来适配不同宽度的屏幕
 export default function (global) {
   var width = 750
   var docEl = window.document.documentElement

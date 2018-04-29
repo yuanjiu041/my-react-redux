@@ -1,10 +1,14 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import routes from '../app/routes'
+import configureStore, { getStore } from '../app/store'
 import Html from 'Components/Html'
 
 export default async (ctx, next) => {
+  // 先创建store，在onEnter里需要用到store
+  const store = configureStore()
   const { redirectLocation, renderProps } = await _match({ routes, location: ctx.url })
   if (redirectLocation) {
     ctx.redirect(redirectLocation.pathname + redirectLocation.search)
@@ -31,13 +35,40 @@ const _match = (location) => {
 }
 
 const renderCmp = async (ctx, next, renderProps) => {
+  const store = getStore()
+
+  const { components } = renderProps
+  let fetchTasks = []
+
+  for (let component of components) {
+    // connect包裹
+    if (component && component.WrappedComponent && component.WrappedComponent.fetch) {
+      const cmpFetchs = component.WrappedComponent.fetch(ctx, store.dispatch)
+      fetchTasks = fetchTasks.concat(cmpFetchs)
+    }
+  }
+
+  let title
+
+  for (let component of components) {
+    if (component && component.WrappedComponent) {
+      title = component.__title__ || component.WrappedComponent.__title__ || 'HOME'
+    }
+  }
+
+  await Promise.all(fetchTasks)
+
   const children = renderToString(
-    <div>
+    <Provider store={store}>
       <RouterContext {...renderProps} />
-    </div>
+    </Provider>
   )
+
   const htmlProps = {
-    title: 'hahaha',
+    title,
+    app: {
+      __REDUX_STATE__: store.getState()
+    },
     children
   }
 

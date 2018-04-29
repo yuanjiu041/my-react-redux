@@ -2,15 +2,18 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseConfig = require('./webpack.base.config')
+const AssetsPlugin = require('assets-webpack-plugin')
+const path = require('path')
 
 module.exports = merge(baseConfig, {
 
   entry: {
-    app: ['babel-polyfill', './app/app.js']
+    app: ['babel-polyfill', './app/app.js'],
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk']
   },
 
   output: {
-    filename: 'app.js'
+    filename: '[name].js'
   },
 
   plugins: [
@@ -23,6 +26,12 @@ module.exports = merge(baseConfig, {
 
     new webpack.DefinePlugin({
       __SERVER__: false
+    }),
+
+    new AssetsPlugin({
+      path: path.resolve('./dist'),
+      filename: 'assets.json',
+      prettyPrint: true
     })
   ]
 })
