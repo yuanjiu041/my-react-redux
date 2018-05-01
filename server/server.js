@@ -2,7 +2,7 @@ import koa from 'koa'
 import path from 'path'
 import koaBody from 'koa-body'
 import router from './router'
-import koaStatic from 'koa-static'
+// import koaStatic from 'koa-static'
 
 const staticMid = require('./middleware/static')
 
@@ -11,6 +11,7 @@ const myRouter = router()
 
 app.use(koaBody())
 
+// 静态资源中间件
 app.use(staticMid({
   rule: '/static/*',
   filePath: path.join(__dirname, '../dist')
