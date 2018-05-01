@@ -2,6 +2,7 @@ import koa from 'koa'
 import path from 'path'
 import koaBody from 'koa-body'
 import router from './router'
+// 移除，改用自己实现的
 // import koaStatic from 'koa-static'
 
 const staticMid = require('./middleware/static')
