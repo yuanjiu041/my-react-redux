@@ -5,7 +5,7 @@ export default (reducer, stateKey) => {
     throw new Error('reducer must be a function')
 
   // 对reducer进行一层封装，处理DATA_FETCH_SUCCESS的情况
-  return (state = {}, action) => {
+  return (state, action) => {
     let nextState = reducer(state, action)
     if (action.type === DATA_FETCH_SUCCESS && action.stateKey === stateKey) {
       nextState = {
