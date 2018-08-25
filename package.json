@@ -7,7 +7,7 @@
     "start": "npm run build & npm run server",
     "nodemon": "nodemon dist/server.js -w dist/server.js",
     "server": "babel-node dist/server.js",
-    "build": "webpack --config config/webpack.config",
+    "build": "webpack --config config/webpack.config -w",
     "build-client": "webpack --config ./config/webpack.client.config",
     "build-server": "webpack --config ./config/webpack.server.config",
     "test": "echo \"Error: no test specified\" && exit 1"

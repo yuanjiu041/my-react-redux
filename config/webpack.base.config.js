@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const contextPath = path.resolve(__dirname, '..')
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'cheap-source-map',
 
   context: contextPath,
 

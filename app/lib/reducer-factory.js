@@ -15,8 +15,6 @@ export default (reducer, stateKey) => {
     }
 
     // 没有浏览器插件，这个将就一下o(*￣︶￣*)o
-    console.log(action)
-    console.log(nextState)
 
     return nextState
   }
