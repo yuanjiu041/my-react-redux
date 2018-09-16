@@ -6,9 +6,11 @@ import routes from '../app/routes'
 import configureStore, { getStore } from '../app/store'
 import Html from 'Components/Html'
 
+const assetsMap = require('../dist/assets.json')
+
 export default async (ctx, next) => {
   // 先创建store，在onEnter里需要用到store
-  const store = configureStore()
+  configureStore()
   const { redirectLocation, renderProps } = await _match({ routes, location: ctx.url })
   if (redirectLocation) {
     ctx.redirect(redirectLocation.pathname + redirectLocation.search)
@@ -69,7 +71,11 @@ const renderCmp = async (ctx, next, renderProps) => {
     app: {
       __REDUX_STATE__: store.getState()
     },
-    children
+    children,
+    scripts: [
+      assetsMap.vendor.js,
+      assetsMap.app.js
+    ]
   }
 
   const html = renderToStaticMarkup(<Html {...htmlProps} />)

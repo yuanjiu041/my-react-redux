@@ -11,7 +11,7 @@ const staticMid = (options) => {
     const rlt = ctx.url.match(ruleReg)
     if (ctx.method === 'GET' || ctx.method === 'HEAD') {
       if (rlt !== null) {
-        await send(ctx, path.join(filePath, rlt[1])).catch(async (err) => {
+        await send(ctx, path.join(filePath, rlt[1])).catch(async () => {
           await next()
         })
         done = true
@@ -35,12 +35,12 @@ function stringPathToReg (path) {
     if (pathSegment === '') {
       continue
     } else if (pathSegment.indexOf(':') === 0) {
-      regString += '\/([^\/]*)'
+      regString += '\/([^\/]*)' // eslint-disable-line
     } else if (pathSegment === '*') {
-      regString += '(\/?.*)'
+      regString += '(\/?.*)' // eslint-disable-line
       break // * 号为结束
     }else {
-      regString +='\/' + pathSegment
+      regString +='\/' + pathSegment // eslint-disable-line
     }
   }
 

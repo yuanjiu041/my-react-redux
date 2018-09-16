@@ -12,7 +12,7 @@ export default class extends React.Component {
   }
 
   render () {
-    const { title, children, app } = this.props
+    const { title, children, app, scripts } = this.props
     const css = getCss()
     
     return (
@@ -21,14 +21,13 @@ export default class extends React.Component {
           <meta charSet='utf-8' />
           <title>{title}</title>
           <style dangerouslySetInnerHTML={{ __html: baseStyle._getCss() }}></style>
-          <style dangerouslySetInnerHTML={{ __html: [...css].join('') }}></style>
+          <style type="text/css" dangerouslySetInnerHTML={{ __html: [...css].join('') }}></style>
           <script dangerouslySetInnerHTML={{ __html: `!(${serialize(rem)})(this)`}} />
         </head>
         <body>
           <div id='app' dangerouslySetInnerHTML={{ __html: children }} />
           <script dangerouslySetInnerHTML={{ __html:  `window.__APP__=${serialize(app)}` }} />
-          <script src='/static/vendor.js' />
-          <script src='/static/app.js' />
+          { scripts.map((item, idx) => <script key={idx} src={`/static/${item}`} />) }
         </body>
       </html>
     )

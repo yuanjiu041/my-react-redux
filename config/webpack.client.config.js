@@ -1,9 +1,12 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseConfig = require('./webpack.base.config')
 const AssetsPlugin = require('assets-webpack-plugin')
 const path = require('path')
+
+const { context } = baseConfig
 
 module.exports = merge(baseConfig, {
 
@@ -13,7 +16,8 @@ module.exports = merge(baseConfig, {
   },
 
   output: {
-    filename: '[name].js'
+    filename: '[name]_[chunkhash:16].js',
+    path: path.resolve(context, 'dist/client')
   },
 
   plugins: [
@@ -38,6 +42,11 @@ module.exports = merge(baseConfig, {
         names: ['vendor'],
     }),
 
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+
+    new CleanWebpackPlugin(
+      ['./dist/client'],
+      context
+    )
   ]
 })

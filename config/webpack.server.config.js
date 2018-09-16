@@ -4,6 +4,8 @@ const path = require('path')
 const baseConfig = require('./webpack.base.config')
 const nodeExternals = require('webpack-node-externals')
 
+const { context } = baseConfig
+
 module.exports = merge(baseConfig, {
   entry: [
     'babel-polyfill',
@@ -11,7 +13,8 @@ module.exports = merge(baseConfig, {
   ],
 
   output: {
-    filename: 'server.js'
+    filename: 'server.js',
+    path: path.resolve(context, 'dist/server')
   },
 
   target: 'node',

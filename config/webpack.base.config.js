@@ -1,16 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
-
 const contextPath = path.resolve(__dirname, '..')
 
 module.exports = {
   devtool: 'cheap-source-map',
 
   context: contextPath,
-
-  output: {
-    path: path.resolve(contextPath, 'dist')
-  },
 
   resolve: {
     extensions: ['.js', '.css', '.less', 'json'],
