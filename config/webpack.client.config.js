@@ -11,8 +11,7 @@ const { context } = baseConfig
 module.exports = merge(baseConfig, {
 
   entry: {
-    app: ['./app/app.js'],
-    vendor: ['babel-polyfill', 'react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk']
+    app: ['./app/app.js']
   },
 
   output: {
@@ -32,17 +31,9 @@ module.exports = merge(baseConfig, {
       __SERVER__: false
     }),
 
-    new AssetsPlugin({
-      path: path.resolve('./dist'),
-      filename: 'assets.json',
-      prettyPrint: true
+    new webpack.DllReferencePlugin({
+      manifest: require('../dist/vendor-manifest.json'),
     }),
-
-    new webpack.optimize.CommonsChunkPlugin({
-        names: ['vendor'],
-    }),
-
-    new webpack.optimize.UglifyJsPlugin(),
 
     new CleanWebpackPlugin(
       ['./dist/client'],
