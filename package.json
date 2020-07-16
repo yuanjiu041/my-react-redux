@@ -30,7 +30,7 @@
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "lodash.merge": "^4.6.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
