@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/yuanjiu041/react-redux#readme",
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "isomorphic-style-loader": "^4.0.0",
     "js-yaml": "^3.13.1",
     "koa": "^2.5.0",
